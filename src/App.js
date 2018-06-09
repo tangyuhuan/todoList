@@ -5,13 +5,13 @@ import TodoItem from "./TodoItem.js"
 import 'normalize.css'
 import './reset.css'
 import './App.css'
-
+import * as localStore from './localStore.js'
 class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             newTodo:'',
-            todoList:[],
+            todoList:localStore.load('todoList')||[],
         }
     }
     addTodo(event){
@@ -48,6 +48,9 @@ class App extends React.Component {
             todoList
         })
     }
+    componentDidUpdate(){
+        localStore.save('todoList', this.state.todoList)
+    }
     render(){
         let todos = this.state.todoList
         .filter((item)=> !item.deleted)
@@ -72,6 +75,6 @@ class App extends React.Component {
 export default App;
 let id = 0;
 function idMaker(){
-id+=1;
-return id;
+    id+=1;
+    return id;
 }
