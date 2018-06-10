@@ -1,6 +1,7 @@
 .UserDialog-Wrapper{ 
 	/*全屏*/      position: fixed; top: 0; left: 0; bottom: 0; right: 0; 
 	/*内容居中*/  display: flex; justify-content: center; align-items: center;
+	background: hsla(0,0%,0%,0.40);
 }
 .UserDialog{
 	border-radius: 5px;
@@ -10,11 +11,20 @@
 	box-shadow: 0 0 1rem hsla(0,0%,0%,0.35);
 }
 
-.UserDialog > .panes { padding: 1.5rem 1.5rem; }
+.UserDialog .forgotPassword > h3 {
+	padding: 1em;
+}
+.UserDialog .forgotPassword > .panes { padding: 0 1em 1em; }
+.UserDialog .forgotPassword > form { padding: 0 1em 1em; }
 
 .UserDialog form>.row{ display: flex; padding: .3rem 0; }
 .UserDialog form>.row>label:first-child{ width: 4rem; }
-.UserDialog form>.row.actions{ padding-left: 4rem; }
+.UserDialog form>.row.actions{ padding-left: 4em; display: flex; align-items: center;}
+
+.UserDialog .signInOrSignUp > nav:first-child{ padding: 1em; margin-left: -2em;}
+.UserDialog .signInOrSignUp > nav:first-child label{ margin-left: 2em; cursor: pointer;}
+.UserDialog .signInOrSignUp > .panes { padding: 0 1em 1em; }
+
 .UserDialog nav {
 	margin-top: 20px;
 	text-align: center;
@@ -47,6 +57,7 @@ button {
 	-webkit-box-shadow: inset 0 -2px #d76b60;
 	box-shadow: inset 0 -2px #d76b60;
 	outline: none;
+	margin-bottom: 10px;
 }
 
 button:active {
@@ -58,7 +69,7 @@ button:active {
 .SignUpOrSignIn-input {
 	width: 100%;
 	height: 50px;
-	margin-bottom: 25px;
+	margin-bottom: 5px;
 	padding: 0 15px 2px;
 	font-size: 17px;
 	background: white;

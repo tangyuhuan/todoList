@@ -59,18 +59,27 @@ class App extends React.Component {
         this.setState(preState => ({
             user:{...preState.user,user:newuser}
         }))*/
+        const newuser = user;
+        this.setState({
+            user:newuser
+        })
+        /*
         let stateCopy = JSON.parse(JSON.stringify(this.state)) 
         stateCopy.user = user
         this.setState(stateCopy)
+        */
     }
     signOut(){
         signOut()
         /*this.setState(preState => ({
             user:{...preState.user,user:{}}
         }))*/
-        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        this.setState({
+            user:{}
+        })
+        /*let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.user = {}
-        this.setState(stateCopy)
+        this.setState(stateCopy)*/
     }
     render(){
         let todos = this.state.todoList
