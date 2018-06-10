@@ -5,7 +5,9 @@ import 'normalize.css'
 import './reset.css'
 import './App.css'
 import UserDialog from './UserDialog'
-import {getCurrentUser, signOut} from './leanCloud'
+import {getCurrentUser, signOut, TodoModel} from './leanCloud'
+
+
 //import * as localStore from './localStore.js'
 
 class App extends React.Component {
@@ -16,44 +18,69 @@ class App extends React.Component {
             newTodo:'',
             todoList: [],
         }
+        let user = getCurrentUser()
+        if (user) {
+          TodoModel.getByUser(user, (todos) => {
+            let stateCopy = JSON.parse(JSON.stringify(this.state))
+            stateCopy.todoList = todos
+            this.setState(stateCopy)
+          })
+        }
     }
     addTodo(event){
-        let todoadd = {id:idMaker(),title:event.target.value,status: null,deleted:false}
-        this.setState(
-            preState=>({
-                todoList:[...preState.todoList,todoadd],
-                newTodo:'',
-                })
-            )
+        let newTodo = {
+            title:event.target.value,
+            status:'',
+            deleted:false
+        }
+        TodoModel.create(newTodo, (id) => {
+          newTodo.id = id
+          this.state.todoList.push(newTodo)
+          this.setState({
+            newTodo: '',
+            todoList: this.state.todoList
+          })
+        }, (error) => {
+          console.log(error)
+        })
     }
     changeTitle(event){
         this.setState({
             newTodo:event.target.value,
             todoList:this.state.todoList,
-
         })
     }
-    toggle(id){
-        const todoList = this.state.todoList.map((item)=>{
+    toggle(e,todo){
+        /*const todoList = this.state.todoList.map((item)=>{
             const newcompleted = item.id === id ? {...item,status:(item.status === 'completed' ? '' : 'completed')}:item;
             return newcompleted;
         })
         this.setState({
             todoList
+        })*/
+        let oldStatus = todo.status
+        todo.status = todo.status === 'completed' ? '' : 'completed'
+        TodoModel.update(todo, () => {
+          this.setState(this.state)
+        }, (error) => {
+          todo.status = oldStatus
+          this.setState(this.state)
         })
     }
-    delete(id){
-        const todoList = this.state.todoList.map((item)=>{
+    delete(event, todo){
+        /*const todoList = this.state.todoList.map((item)=>{
             const newdelete = item.id === id ? {...item,deleted:true}:item;
             return newdelete;
         })
         this.setState({
             todoList
+        })*/
+        TodoModel.destroy(todo.id, () => {
+          todo.deleted = true
+          this.setState(this.state)
         })
     }
-    componentDidUpdate(){
-        //localStore.save('todoList', this.state.todoList)
-    }
+
     onSignUpOrSignIn(user){
         /*const newuser = user;
         this.setState(preState => ({
@@ -84,9 +111,9 @@ class App extends React.Component {
     render(){
         let todos = this.state.todoList
         .filter((item)=> !item.deleted)
-        .map((item)=>{
+        .map((item,index)=>{
             return  (
-                <li key={item.id}>
+                <li key={index}>
                     <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.delete.bind(this)}/>
                 </li>
                 )
@@ -108,8 +135,3 @@ class App extends React.Component {
     }
 }
 export default App;
-let id = 0;
-function idMaker(){
-    id+=1;
-    return id;
-}

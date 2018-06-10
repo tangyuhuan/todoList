@@ -4,11 +4,13 @@ import './TodoItem.css'
 
 
 class TodoItem extends Component{
-    toggle(){
-        this.props.onToggle(this.props.todo.id)
+    toggle(e){
+        //this.props.onToggle(this.props.todo.id)
+        this.props.onToggle(e, this.props.todo)
     }
-    delete(){
-        this.props.onDelete(this.props.todo.id)
+    delete(e){
+        //this.props.onDelete(this.props.todo.id)
+        this.props.onDelete(e, this.props.todo)
     }
     render(){
         return (
