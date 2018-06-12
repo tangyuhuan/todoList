@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	border-bottom:1px dashed #777;
+	margin-top:;
 }
 .TodoItem>.checkbox{
 	width: 20px;
@@ -19,8 +20,8 @@
 }
 .Delete-button {
 	border:none;
-	height:45px;
-	width:45px;
+	height:40px;
+	width:40px;
 	border-radius: 50%;
 	outline:none;
 }
