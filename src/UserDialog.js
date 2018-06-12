@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './UserDialog.css'
 import {signUp, signIn, sendPasswordResetEmail} from './leanCloud'
 import ForgotPasswordForm from './ForgotPasswordForm'
-import SignInOrSignUp from './SignInOrSignUp'
+//import SignInOrSignUp from './SignInOrSignUp'
+import SimpleTabs from './SimpleTabs'
 class UserDialog extends Component{
 	constructor(props){
 		super(props)
@@ -103,10 +104,9 @@ class UserDialog extends Component{
 		return(
 			<div className="UserDialog-Wrapper">
 			   <div className="UserDialog">
-			   	<div className="Line"></div>
 				    {
 				    	this.state.selectedTab === 'signInOrSignUp' ? 
-				    	<SignInOrSignUp 
+				    	<SimpleTabs 
 				    	formData={this.state.formData} 
 				    	onSignIn={this.signIn.bind(this)}
 				    	onSignUp={this.signUp.bind(this)}

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './TodoItem.css'
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
 
 class TodoItem extends Component{
     toggle(e){
@@ -13,9 +16,9 @@ class TodoItem extends Component{
     render(){
         return (
             <div className="TodoItem">
-                <input type="checkbox" checked={this.props.todo.status === 'completed'} onChange={this.toggle.bind(this)}/>
+                <input className="checkbox" type="checkbox" checked={this.props.todo.status === 'completed'} onChange={this.toggle.bind(this)}/>
                 <span className="title">{this.props.todo.title}</span>
-                <button className="Delete-button" onClick={this.delete.bind(this)}>delete</button>
+                <button className="Delete-button" onClick={this.delete.bind(this)}><DeleteIcon className="deleteicon"/></button>
             </div>
         )
     }

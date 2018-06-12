@@ -18,16 +18,12 @@ class SignInOrSignUp extends Component{
 		return(
 	      <div className="signInOrSignUp">
 	        <nav>
-	          <label>
 	            <input type="radio" value="signUp" 
 	              checked={this.state.selected === 'signUp'}
 	              onChange={this.switch.bind(this)}
-	            /> Sign Up</label>
-	          <label>
 	            <input type="radio" value="signIn" 
 	              checked={this.state.selected === 'signIn'}
 	              onChange={this.switch.bind(this)}
-	            /> Sign In</label>
 	        </nav>
 	        <div className="panes">
 	          {this.state.selected === 'signUp' ? 

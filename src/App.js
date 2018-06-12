@@ -1,15 +1,13 @@
 import React from "react";
 import TodoInput from "./TodoInput.js"
 import TodoItem from "./TodoItem.js"
-import 'normalize.css'
 import './reset.css'
 import './App.css'
 import UserDialog from './UserDialog'
 import {getCurrentUser, signOut, TodoModel} from './leanCloud'
 import moment from 'moment';
-import { Icon } from 'antd';
 //import * as localStore from './localStore.js'
-
+import DragTodoItem from './DragTodoItem'
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -17,6 +15,8 @@ class App extends React.Component {
             user: getCurrentUser()||{},
             newTodo:'',
             todoList: [],
+            timer:'',
+            time:moment().format('MMMM Do YYYY')
         }
         let user = getCurrentUser()
         if (user) {
@@ -109,6 +109,20 @@ class App extends React.Component {
         stateCopy.user = {}
         this.setState(stateCopy)*/
     }
+    componentDidMount(){
+        this.state.timer=setInterval(()=>{
+            this.setState({
+                time:moment().format('MMMM Do YYYY')
+            })
+        },60000*60*24)
+    }
+    componentWillUnmount(){
+        if(this.state.timer!= null) {
+
+        clearInterval(this.state.timer);
+
+        }
+    }
     render(){
         let todos = this.state.todoList
         .filter((item)=> !item.deleted)
@@ -119,14 +133,13 @@ class App extends React.Component {
                 </li>
                 )
         })
+
         return(
             <div className="App">
-
-                <div className="line">{this.state.user.username||'Who'}'s ToDo List
-                <Icon type="logout"/>
-                <i>&#xe61c;</i>
-                    {this.state.user.id ? <button className="SignOut-button" onClick={this.signOut.bind(this)}>Sign out</button> : null}
-                    <h3>{moment().format("LL")}</h3>
+                <div className="line">
+                    {this.state.user.id ? <button className="SignOut-button" onClick={this.signOut.bind(this)}>logout</button> : null}
+                    <div className="title">{this.state.user.username||'Who'}'s ToDo List </div>
+                    <h3>{this.state.time}</h3>
                 </div>
                 <div className="contentWrapper">
                     <div className="inputWrapper">

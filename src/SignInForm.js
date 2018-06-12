@@ -9,8 +9,8 @@ export default function(props){
 		      <input type="password" className="SignUpOrSignIn-input" placeholder="password" value={props.formData.password} onChange={props.onChange.bind(this, 'password')}/>
 		    </div>
 		    <div className="row-actions">
-		      <button type="submit">Sign In</button>
-		      <a href="#" onClick={props.onForgotPassword}>forget password？</a>
+		      <button type="submit" className="signbutton">Sign In</button>
+		      <a href="#" className="forgetPsw"onClick={props.onForgotPassword}>forget password？</a>
 		    </div>
 		</form>
 	)

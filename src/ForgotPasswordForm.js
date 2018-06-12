@@ -13,8 +13,8 @@ class ForgotPasswordForm extends Component{
 			          onChange={this.props.onChange.bind(this, 'email')}/>
 			      </div>
 			      <div className="row-actions">
-			        <button type="submit">send email to reset password</button>
-			        <a href="#" onClick={this.props.onSignIn}>back to login</a>
+			        <button className="signbutton" type="submit">send email to reset password</button>
+			        <a href="#" className="forgetPsw" onClick={this.props.onSignIn}>back to login</a>
 			      </div>
 			    </form>
 			 </div>
