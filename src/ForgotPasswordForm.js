@@ -4,7 +4,7 @@ class ForgotPasswordForm extends Component{
 		return(
 			<div className="forgotPassword">
 			<h3>
-			  重置密码
+			  reset password
 			</h3>
 			<div className="panes">
 			    <form className="forgotPassword" onSubmit={this.props.onSubmit}> {/* 登录*/}
@@ -13,8 +13,8 @@ class ForgotPasswordForm extends Component{
 			          onChange={this.props.onChange.bind(this, 'email')}/>
 			      </div>
 			      <div className="row-actions">
-			        <button type="submit">发送重置邮件</button>
-			        <a href="#" onClick={this.props.onSignIn}>返回登录</a>
+			        <button type="submit">send email to reset password</button>
+			        <a href="#" onClick={this.props.onSignIn}>back to login</a>
 			      </div>
 			    </form>
 			 </div>

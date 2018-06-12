@@ -6,8 +6,8 @@ import './reset.css'
 import './App.css'
 import UserDialog from './UserDialog'
 import {getCurrentUser, signOut, TodoModel} from './leanCloud'
-
-
+import moment from 'moment';
+import { Icon } from 'antd';
 //import * as localStore from './localStore.js'
 
 class App extends React.Component {
@@ -58,6 +58,7 @@ class App extends React.Component {
         this.setState({
             todoList
         })*/
+
         let oldStatus = todo.status
         todo.status = todo.status === 'completed' ? '' : 'completed'
         TodoModel.update(todo, () => {
@@ -120,16 +121,22 @@ class App extends React.Component {
         })
         return(
             <div className="App">
-                <h1>{this.state.user.username||'我'}的待办事项
-                    {this.state.user.id ? <button className="SignOut-button" onClick={this.signOut.bind(this)}>登出</button> : null}
-                </h1>
-                <div className="inputWrapper">
-                <TodoInput content={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)}/>
+
+                <div className="line">{this.state.user.username||'Who'}'s ToDo List
+                <Icon type="logout"/>
+                <i>&#xe61c;</i>
+                    {this.state.user.id ? <button className="SignOut-button" onClick={this.signOut.bind(this)}>Sign out</button> : null}
+                    <h3>{moment().format("LL")}</h3>
                 </div>
-                <ol className="todoList">
-                    {todos}
-                </ol>
-                {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUpOrSignIn.bind(this)} onSignIn={this.onSignUpOrSignIn.bind(this)}/>}
+                <div className="contentWrapper">
+                    <div className="inputWrapper">
+                    <TodoInput content={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)}/>
+                    </div>
+                    <ol className="todoList">
+                        {todos}
+                    </ol>
+                    {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUpOrSignIn.bind(this)} onSignIn={this.onSignUpOrSignIn.bind(this)}/>}
+                </div>
             </div>
         )
     }

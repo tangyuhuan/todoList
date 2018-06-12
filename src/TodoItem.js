@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './TodoItem.css'
 
-
-
 class TodoItem extends Component{
     toggle(e){
         //this.props.onToggle(this.props.todo.id)
@@ -17,7 +15,7 @@ class TodoItem extends Component{
             <div className="TodoItem">
                 <input type="checkbox" checked={this.props.todo.status === 'completed'} onChange={this.toggle.bind(this)}/>
                 <span className="title">{this.props.todo.title}</span>
-                <button className="Delete-button" onClick={this.delete.bind(this)}>删除</button>
+                <button className="Delete-button" onClick={this.delete.bind(this)}>delete</button>
             </div>
         )
     }
@@ -25,3 +23,6 @@ class TodoItem extends Component{
 
 
 export default TodoItem;
+
+
+

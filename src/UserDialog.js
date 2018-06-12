@@ -18,6 +18,16 @@ class UserDialog extends Component{
 	signUp(e){
 		e.preventDefault()
 		let {email, username, password} = this.state.formData
+    	var validUsernameTest = /^\w{3,}$/
+		if(username.length<3){
+			alert('用户名必须大于三个字符');
+			return;
+		}
+		var validPasswordTest = /^\w{6,}$/
+		if(!validPasswordTest.test(password)){
+			alert('密码只能由字母、数字、下划线组成，且必须大于6个字符');
+			return;
+		}
 	    let success = (user)=>{
 	        this.props.onSignUp(user)
 	    }
@@ -25,6 +35,9 @@ class UserDialog extends Component{
       		switch(error.code){
         	case 202:
           		alert('用户名已被占用')
+          		break
+          	case 125:
+          		alert('请输入有效的email地址')
           		break
         	default:
           		alert(error)

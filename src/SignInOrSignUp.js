@@ -22,12 +22,12 @@ class SignInOrSignUp extends Component{
 	            <input type="radio" value="signUp" 
 	              checked={this.state.selected === 'signUp'}
 	              onChange={this.switch.bind(this)}
-	            /> 注册</label>
+	            /> Sign Up</label>
 	          <label>
 	            <input type="radio" value="signIn" 
 	              checked={this.state.selected === 'signIn'}
 	              onChange={this.switch.bind(this)}
-	            /> 登录</label>
+	            /> Sign In</label>
 	        </nav>
 	        <div className="panes">
 	          {this.state.selected === 'signUp' ? 
