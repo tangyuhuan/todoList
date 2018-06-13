@@ -7,7 +7,9 @@ import UserDialog from './UserDialog'
 import {getCurrentUser, signOut, TodoModel} from './leanCloud'
 import moment from 'moment';
 //import * as localStore from './localStore.js'
-import DragTodoItem from './DragTodoItem'
+
+import Dragula from 'react-dragula';
+
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -109,6 +111,13 @@ class App extends React.Component {
         stateCopy.user = {}
         this.setState(stateCopy)*/
     }
+    dragulaDecorator =(componentBackingInstance)=>{
+        if(componentBackingInstance){
+            let options={};
+            Dragula([componentBackingInstance], options);
+        }
+    }
+
     componentDidMount(){
         this.state.timer=setInterval(()=>{
             this.setState({
@@ -124,16 +133,17 @@ class App extends React.Component {
         }
     }
     render(){
+
         let todos = this.state.todoList
         .filter((item)=> !item.deleted)
         .map((item,index)=>{
             return  (
-                <li key={index}>
+                    <li key={index}>
                     <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.delete.bind(this)}/>
-                </li>
+                    </li>
                 )
         })
-
+        console.log(todos)
         return(
             <div className="App">
                 <div className="line">
@@ -146,7 +156,9 @@ class App extends React.Component {
                     <TodoInput content={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)}/>
                     </div>
                     <ol className="todoList">
+                    <div className='container' ref={this.dragulaDecorator}>
                         {todos}
+                    </div>
                     </ol>
                     {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUpOrSignIn.bind(this)} onSignIn={this.onSignUpOrSignIn.bind(this)}/>}
                 </div>
