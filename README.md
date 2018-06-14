@@ -1,4 +1,4 @@
-### 基于React的TodoList应用 (Web版)
+### 基于React的TodoList应用
 使用React构建应用界面。用户可以注册、登录、找回密码，登录成功后可以实现待办事项的添加、标记为已完成、删除。待办事项列表可以上下拖拽。
 [使用地址](https://tangyuhuan.github.io/useTodoList/)
 ### 部分效果截图
